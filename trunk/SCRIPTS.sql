@@ -2,7 +2,7 @@ rem / TDA /
 
 rem / TDA HISTORIA /
 
-create or replace type t_historia as object (
+create type t_historia as object (
 hist_fecha date,
 hist_hecho varchar2(1000)
 );
@@ -41,7 +41,7 @@ dato_etnicidad varchar2(25)
 
 rem / TDA CREADOR /
 
-create or replace tyoe t_creador as object(
+create or replace type t_creador as object(
 crea_nombre varchar2(50),
 crae_rol varchar(50)
 );
@@ -72,21 +72,22 @@ rem / TABLAS ANIDADAS /
 rem / TABLA ANIDADA NOMBRE /
 
 create or replace type nt_nombre as table of t_nombre;
-
+/
 
 rem / TABLA ANIDADA RECIBIDO /
 
 create or replace type nt_recibido as table of t_recibido;
-
+/
 
 rem / TABLA ANIDADA CREADOR /
 
 create or replace type nt_creador as table of t_creador;
-
+/
 
 rem / TABLA ANIDADA HISTORIA /
 
 create or replace type nt_historia as table of t_historia;
+/
 
 rem / TDA ESTATUILLA FALTA/
 
@@ -98,9 +99,7 @@ este_historia nt_historia,
 este_medida t_medida,
 este_descripcion varchar2(400)
 );
-
-
-rem / TABLAS /
+/
 
 rem / TABLA PREMIO_CATEGORIA /
 
@@ -108,11 +107,12 @@ CREATE TABLE PREMIO_CATEGORIA(
 PREM_ID NUMBER NOT NULL,
 PREM_NIVEL NUMBER NOT NULL,
 PREM_DESCRIPCION VARCHAR2(400) NOT NULL,
-PREM_NOMBRE nt_nombre NOT NULL,
+PREM_NOMBRE nt_nombre NULL,
 PREM_PREMIO VARCHAR2(50) NOT NULL,
-PREM_ESTATUILLA t_estatuilla NOT NULL,
+PREM_ESTATUILLA t_estatuilla,
 CONSTRAINT PK_PREMIO_CATEGORIA PRIMARY KEY (PREM_ID)
-);
+)nested table PREM_NOMBRE store as nom_nt;
+
 
 rem / TABLA CURIOSIDAD_CRITICA /
 
@@ -284,17 +284,6 @@ CONSTRAINT PK_VOTO PRIMARY KEY(VOTO_ID),
 CONSTRAINT CH_VOTO_TIPO CHECK (VOTO_TIPO IN('N','G')
 );
 
-rem / TABLA LUGAR /
-
-CREATE TABLE LUGAR(
-LUGA_ID NUMBER NOT NULL,
-LUGA_TIPO NUMBER NOT NULL,
-LUGA_NOMBRE VARCHAR2(50), NOT NULL,
-LUGA_NACIONALIDAD VARCHAR2(50) NULL,
-LUGA_PADRE NUMBER NOT NULL,
-CONSTRAINT PK_LUGAR PRIMARY KEY(LUGA_ID)
-);
-
 rem / TABLA POSTULADO /
 
 CREATE TABLE POSTULADO(
@@ -306,11 +295,25 @@ POST_ACEPTADO VARCHAR2 (2) NULL,
 POST_RECIBIDO nt_recibido NOT NULL,
 POST_PREMIO NUMBER NOT NULL,
 POST_PELICULA NUMBER NOT NULL,
+POST_STAFF NUMBER NULL,
 CONSTRAINT PK_POSTULADO PRIMARY KEY(POST_ID),
-CONSTRAINT CH_POST_NOMINADA CHECK(POST_NOMINADA IN('SI','NO'),
-CONSTRAINT CH_POST_GANADORA CHECK(POST_GANADORA IN('SI','NO'),
-CONSTRAINT CH_POST_ACEPTADO CHECK(POST_ACEPTADO IN('SI','NO'),
+CONSTRAINT CH_POST_NOMINADA CHECK(POST_NOMINADA IN('SI','NO')),
+CONSTRAINT CH_POST_GANADORA CHECK(POST_GANADORA IN('SI','NO')),
+CONSTRAINT CH_POST_ACEPTADO CHECK(POST_ACEPTADO IN('SI','NO')),
+)nested table POST_RECIBIDO store as rec_post;
+
+rem / TABLA LUGAR /
+
+CREATE TABLE LUGAR(
+LUGA_ID NUMBER NOT NULL,
+LUGA_TIPO NUMBER NOT NULL,
+LUGA_NOMBRE VARCHAR2(50), NOT NULL,
+LUGA_NACIONALIDAD VARCHAR2(50) NULL,
+LUGA_PADRE NUMBER NOT NULL,
+CONSTRAINT PK_LUGAR PRIMARY KEY(LUGA_ID)
 );
+
+
 
 rem / TABLA POST_PRES /
 
