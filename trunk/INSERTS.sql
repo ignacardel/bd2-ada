@@ -17,8 +17,8 @@ INSERT INTO CEREMONIA VALUES (S_CEREMONIA.NEXTVAL,to_date('24/05/1986','dd/mm/yy
 
 rem / INSERTS PREMIO_CATEGORIA /
 
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de actuacion del cine.',nt_nombre(t_nombre('Actores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla');
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de guionistas del cine.',nt_nombre(t_nombre('Guionistas',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla');
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de direccion del cine.',nt_nombre(t_nombre('Directores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla');
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de produccion del cine.',nt_nombre(t_nombre('Productores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla');
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama tecnica del cine.',nt_nombre(t_nombre('Tecnicos',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla');
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de actuacion del cine.',nt_nombre(t_nombre('Actores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de guionistas del cine.',nt_nombre(t_nombre('Guionistas',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de direccion del cine.',nt_nombre(t_nombre('Directores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de produccion del cine.',nt_nombre(t_nombre('Productores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama tecnica del cine.',nt_nombre(t_nombre('Tecnicos',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
