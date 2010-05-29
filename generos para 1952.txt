@@ -1,0 +1,38 @@
+drama/ A Streetcar Named Desire
+drama/A Place in the Sun
+musical/An American in Paris
+aventura/The African Queen
+biografia drama musical/The great caruso
+comedia musical romance/ here comes the groom
+sci-fi/ when worlds collide
+drama/Rashomon
+drama thriller/ Seven Days to Noon
+historica/Quo vadis
+drama historia romance/ David and Bathsheba
+drama/Death of a Salesman	
+policiaca/Detective Story	
+aventura romance fantasia musical/The Tales of Hoffmann
+drama/Decision Before Dawn
+drama/The Blue Veil
+drama/Bright Victory
+comedia musical/ On the Riviera	
+drama/The Well
+drama/ La Ronde
+drama musical romance/Show Boat		
+aventura guerra drama/The Frogmen
+comedia/The Mating Season
+drama/teresa
+drama guerra/Go for the broke
+fantasia/alice in wonderland
+musical/Golden girl
+comedia musical romance/royal wedding
+musical/rich, Young and pretty
+crimen misterio romance/Strangers on a train
+drama misterio suspenso/the house on telegraph hill
+comedia/too Young to kiss
+crimen drama/knock on any door
+LA DAMA AMABLE
+DOS ENTRADAS PARA BROADWAY
+NO QUIERO DECIRTE ADIOS
+
+
