@@ -32,6 +32,7 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de guionistas del c
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de direccion del cine.',nt_nombre(t_nombre('Directores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama de produccion del cine.',nt_nombre(t_nombre('Productores',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,1,'Rama tecnica del cine.',nt_nombre(t_nombre('Tecnicos',to_date('01/01/1928','dd/mm/YYYY'),NULL)),'Estatuilla',NULL);
+
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de la produccion referida a los largometrajes, es decir, peliculas de mas de 60 min.',nt_nombre(t_nombre('Largometrajes',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de la produccion referida a los cortometrajes, es decir, peliculas de menos de 60 min.',nt_nombre(t_nombre('Cortometrajes',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los directores enfocados en la direccion general',nt_nombre(t_nombre('Direccion',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',3);
@@ -44,11 +45,34 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en la edicion',nt_nombre(t_nombre('Edicion',to_date('1/1/1935','dd/mm/yyyy'),NULL)),'Estatuilla',5);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en los efectos visuales',nt_nombre(t_nombre('Efectos Visuales',to_date('1/1/1939','dd/mm/yyyy'),NULL)),'Estatuilla',5);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en los documentales',nt_nombre(t_nombre('Documentales',to_date('1/1/1934','dd/mm/yyyy'),NULL)),'Estatuilla',4);
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en los vestuarios',nt_nombre(t_nombre('Musica',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',5);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en los vestuarios',nt_nombre(t_nombre('Vestuario',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',5);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en peliculas extranjeras',nt_nombre(t_nombre('Peliculas Extranjeras',to_date('1/1/1956','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en el maquillaje',nt_nombre(t_nombre('Maquilaje',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',5);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en las peliculas animadas',nt_nombre(t_nombre('Peliculas Animadas',to_date('1/1/2001','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Pelicula',nt_nombre(t_nombre('Mejor Pelicula',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',6);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al Mejor Actor',nt_nombre(t_nombre('Mejor Actor',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',9);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Actriz',nt_nombre(t_nombre('Mejor Actriz',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',9);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor actor de reparto',nt_nombre(t_nombre('Mejor Actor de Reparto',to_date('1/1/1936','dd/mm/yyyy'),NULL)),'Estatuilla',9);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor actriz de reparto',nt_nombre(t_nombre('Mejor Actriz de Reparto',to_date('1/1/1936','dd/mm/yyyy'),NULL)),'Estatuilla',9);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor director',nt_nombre(t_nombre('Mejor Director',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',8);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor guion adaptado',nt_nombre(t_nombre('Mejor Guion Adaptado',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',10);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor fotografia',nt_nombre(t_nombre('Mejor Fotografia',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',11);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor direccion de arte',nt_nombre(t_nombre('Mejor Direccion de Arte',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',12);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor sonido',nt_nombre(t_nombre('Mejor Sonido',to_date('1/1/1930','dd/mm/yyyy'),NULL)),'Estatuilla',13);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor cortometraje de ficcion',nt_nombre(t_nombre('Mejor Cortometraje de Ficcion',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',7);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor banda sonora',nt_nombre(t_nombre('Mejor Banda Sonora',to_date('1/1/1934','dd/mm/yyyy'),NULL)),'Estatuilla',14);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor cancion original',nt_nombre(t_nombre('Mejor Cancion Original',to_date('1/1/1934','dd/mm/yyyy'),NULL)),'Estatuilla',14);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor montaje',nt_nombre(t_nombre('Mejor Montaje',to_date('1/1/1935','dd/mm/yyyy'),NULL)),'Estatuilla',15);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a los mejores efectos visuales',nt_nombre(t_nombre('Mejores Efectos Visuales',to_date('1/1/1939','dd/mm/yyyy'),NULL)),'Estatuilla',16);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor guion original',nt_nombre(t_nombre('Mejor Guion Original',to_date('1/1/1940','dd/mm/yyyy'),NULL)),'Estatuilla',10);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor documental corto',nt_nombre(t_nombre('Mejor Documental Corto',to_date('1/1/1941','dd/mm/yyyy'),NULL)),'Estatuilla',17);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor documental largo',nt_nombre(t_nombre('Mejor Banda Sonora',to_date('1/1/1943','dd/mm/yyyy'),NULL)),'Estatuilla',17);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor diseno de vestuario',nt_nombre(t_nombre('Mejor Diseno de Vestuario',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',18);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor pelicula de habla no inglesa',nt_nombre(t_nombre('Mejor Pelicula de Habla no Inglesa',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',21);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor edicion de sonido',nt_nombre(t_nombre('Mejor Edicion de Sonido',to_date('1/1/1963','dd/mm/yyyy'),NULL)),'Estatuilla',13);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor maquillaje',nt_nombre(t_nombre('Mejor Maquillaje',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',20);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor pelicula de animacion',nt_nombre(t_nombre('Mejor Pelicula Animada',to_date('1/1/2001','dd/mm/yyyy'),NULL)),'Estatuilla',21);
 
 rem / INSERTS ROL /
 
