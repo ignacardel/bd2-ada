@@ -49,6 +49,7 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en peliculas extranjeras',nt_nombre(t_nombre('Peliculas Extranjeras',to_date('1/1/1956','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos enfocada en el maquillaje',nt_nombre(t_nombre('Maquilaje',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',5);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en las peliculas animadas',nt_nombre(t_nombre('Peliculas Animadas',to_date('1/1/2001','dd/mm/yyyy'),NULL)),'Estatuilla',4);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en los casos especiales',nt_nombre(t_nombre('Especiales',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Pelicula',nt_nombre(t_nombre('Mejor Pelicula',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',6);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al Mejor Actor',nt_nombre(t_nombre('Mejor Actor',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',9);
@@ -73,6 +74,16 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mej
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor edicion de sonido',nt_nombre(t_nombre('Mejor Edicion de Sonido',to_date('1/1/1963','dd/mm/yyyy'),NULL)),'Estatuilla',13);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor maquillaje',nt_nombre(t_nombre('Mejor Maquillaje',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',20);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor pelicula de animacion',nt_nombre(t_nombre('Mejor Pelicula Animada',to_date('1/1/2001','dd/mm/yyyy'),NULL)),'Estatuilla',21);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la juventud de la academia',nt_nombre(t_nombre('Premio Juvenil de la Academia',to_date('1/1/1934','dd/mm/yyyy'),to_date('1/1/1960','dd/mm/yyyy'))),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Honorifico o especial',nt_nombre(t_nombre('Oscar Honorifico o Especial',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Irving Thalberg',nt_nombre(t_nombre('Irving Thalberg',to_date('1/1/1938','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Humanitario Jean Hersholt',nt_nombre(t_nombre('Jean Hersholt',to_date('1/1/1956','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Oscar Gordon E. Sawyer',nt_nombre(t_nombre('Gordon E. Sawyer',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Cientificos y Tecnicos',nt_nombre(t_nombre('Cientificos y Tecnicos',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al merito tecnico o cientifico',nt_nombre(t_nombre('Oscar al Merito Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',51);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico o cientifico',nt_nombre(t_nombre('Premio al Logro Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Placa',51);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico',nt_nombre(t_nombre('Premio al Logro Tecnico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Reconocimiento',51);
 
 rem / INSERTS ROL /
 
