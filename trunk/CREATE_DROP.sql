@@ -43,7 +43,6 @@ DROP TYPE nt_nombre;
 DROP TYPE t_medida;
 DROP TYPE t_nombre;
 DROP TYPE t_creador;
-DROP TYPE t_datos_per;
 DROP TYPE t_proceso;
 DROP TYPE t_historia;
 DROP TYPE t_recibido;
@@ -73,20 +72,6 @@ rem / TDA PROCESO /
 create or replace type t_proceso as object (
 proc_nombre varchar2(50),
 proc_descripcion varchar2(400)
-);
-/
-
-rem / TDA DATOS_PER /
-
-create or replace type t_datos_per as object(
-dato_nombre varchar2(25),
-dato_nombre2 varchar2(25),
-dato_apellido varchar2(25),
-dato_apellido2 varchar2(25),
-dato_foto blob,
-dato_bio varchar(4000),
-dato_fecha_nac date,
-dato_etnicidad varchar2(25)
 );
 /
 
@@ -270,7 +255,14 @@ rem / TABLA PERSONA /
 
 CREATE TABLE PERSONA(
 PERS_ID NUMBER NOT NULL,
-PERS_DATOS t_datos_per NOT NULL,
+PERS_NOMBRE varchar2(25) NOT NULL,
+PERS_NOMBRE2 varchar2(25) NULL,
+PERS_APELLIDO varchar2(25) NOT NULL,
+PERS_APELLIDO2 varchar2(25) NULL,
+PERS_FOTO blob NULL,
+PERS_BIO varchar(4000) NULL,
+PERS_FECHA_NAC date NOT NULL,
+PERS_ETNICIDAD varchar2(25) NULL,
 PERS_LUGAR NUMBER NOT NULL,
 CONSTRAINT PK_PERSONA PRIMARY KEY(PERS_ID)
 );
