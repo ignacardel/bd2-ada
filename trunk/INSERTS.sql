@@ -308,3 +308,8 @@ INSERT INTO "DISTRIBUCION_COMP" VALUES (22, 'National Film Board of Canada', NUL
 INSERT INTO "DISTRIBUCION_COMP" VALUES (23, 'The Cannon Group Inc', 'The Cannon Group Inc. was a group of companies including Cannon Films which produced a distinctive line of low to medium budget films from 1967 to 1993. The extensive group also owned amongst others, a large international cinema chain and a video film company which invested heavily in the video market, buying the international video rights to several classic film libraries.');
 INSERT INTO "DISTRIBUCION_COMP" VALUES (24, 'Bud Yorkin Productions', NULL);
 INSERT INTO "DISTRIBUCION_COMP" VALUES (25, 'Island Pictures', NULL);
+INSERT INTO "DISTRIBUCION_COMP" VALUES (26, 'TriStar Pictures', NULL);
+INSERT INTO "DISTRIBUCION_COMP" VALUES (27, 'Touchstone Pictures', NULL);
+INSERT INTO "DISTRIBUCION_COMP" VALUES (28, 'New Yorker Films', NULL);
+INSERT INTO "DISTRIBUCION_COMP" VALUES (29, 'Cinecom International', NULL);
+INSERT INTO "DISTRIBUCION_COMP" VALUES (30, 'Futura Films', NULL);
