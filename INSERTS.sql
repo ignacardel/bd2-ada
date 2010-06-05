@@ -364,7 +364,7 @@ INSERT INTO PELICULA VALUES (111, 'The Children of Soong Ching Ling', NULL, NULL
 INSERT INTO PELICULA VALUES (112, 'Dangerous Moves', 'Movimientos Peligrosos', NULL, 'Dangerous Moves is a 1984 French language film about chess, directed by Richard Dembo and starring Michel Piccoli and Alexandre Arbatt. Its original French title is La diagonale du fou (The Fools Diagonal, referring to the chess piece called the bishop in English but the fool in French). The film was a co-production between companies in France and Switzerland. It tells the story of two very different men competing in the World Chess Championship Games. One is a 52-year-old Soviet Jew who holds the title, and the other is a 35-year-old genius who defected to the West several years earlier', 110, TO_DATE('19840524000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'Frances', 'A', 7, 58, NULL);
 INSERT INTO PELICULA VALUES (113, 'Beyond the walss', NULL, NULL, 'The story takes place in the high-security block of the central Israel Prison Service jail. Uri and Issam are the leaders of the Israeli and Palestinian prisoner groups, respectively. After a musical performance in the prison, a row breaks out between Hoffman, a Jewish inmate, and a Palestinian. When Hoffman is killed, the security officer initiates a fight between the sides, pinning the blame for the murder on Issams cell.', 100, TO_DATE('19840831000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'Arabe', 'R', 15, 58, NULL);
 INSERT INTO PELICULA VALUES (114, 'Camila', NULL, NULL, 'It is 1847 and Camila OGorman (Susu Pecoraro), a pillar of Buenos Aires society, belongs to a family which enthusiastically supports Argentine dictator Juan Manuel de Rosas. She is engaged to Ignacio, a wealthy man with whom she is not in love. When her fellow socialites advise her to not let Ignacio get away, she describes her longing for a husband she could love and feel proud of. Secretly, she reads literature critical of the regime by author Esteban Echeverria.', 90, TO_DATE('19840808000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'Espanol', 'A', 9, 58, NULL);
-
+INSERT INTO PELICULA VALUES (115, 'Rambo IV', NULL, NULL, 'Rambo: First Blood Part II is a 1985 second film in the Rambo series and is an Action/War film starring Sylvester Stallone as Vietnam veteran John Rambo.', 90, TO_DATE('19840808000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'Ingles', 'R', 1, 36, NULL);
 rem / INSERTS COMPANIAS /
 
 INSERT INTO "DISTRIBUCION_COMP" VALUES (1, 'Charles K. Feldman Group', NULL);
@@ -516,6 +516,7 @@ INSERT INTO DIST_PELI VALUES (7,111);
 INSERT INTO DIST_PELI VALUES (29,112);
 INSERT INTO DIST_PELI VALUES (20,113);
 INSERT INTO DIST_PELI VALUES (19,114);
+INSERT INTO DIS_PELI VALUES (2,115);
 
 rem / INSERTS PERSONA /
 
