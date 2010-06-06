@@ -123,6 +123,8 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Irving Thalberg',
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Humanitario Jean Hersholt',nt_nombre(t_nombre('Jean Hersholt',to_date('1/1/1956','dd/mm/yyyy'),NULL)),'Estatuilla',22);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Oscar Gordon E. Sawyer',nt_nombre(t_nombre('Gordon E. Sawyer',to_date('1/1/1981','dd/mm/yyyy'),NULL)),'Estatuilla',22);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio Cientificos y Tecnicos',nt_nombre(t_nombre('Cientificos y Tecnicos',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',22);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio al mejor argumento',nt_nombre(t_nombre('Mejor Argumento',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',10);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio a la mejor Edicion de Video',nt_nombre(t_nombre('Edicion de Video',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',15);
 
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al merito tecnico o cientifico',nt_nombre(t_nombre('Oscar al Merito Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',51);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico o cientifico',nt_nombre(t_nombre('Premio al Logro Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Placa',51);
