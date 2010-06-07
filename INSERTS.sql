@@ -128,8 +128,8 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio a la mejor Edicio
 
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al merito tecnico o cientifico',nt_nombre(t_nombre('Oscar al Merito Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',51);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico o cientifico',nt_nombre(t_nombre('Premio al Logro Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Placa',51);
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico',nt_nombre(t_nombre('Premio al Logro Tecnico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Reconocimiento',51);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio Fotografia Blanco y Negro',nt_nombre(t_nombre('Premio a la mejor fotografia blanco y negro',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',30);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico',nt_nombre(t_nombre('Premio al Logro Tecnico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Reconocimiento',51);
 
 rem / INSERTS ROL /
 
