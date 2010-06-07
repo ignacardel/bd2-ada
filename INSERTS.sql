@@ -111,7 +111,7 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a los mejores efectos visuales',nt_nombre(t_nombre('Mejores Efectos Visuales',to_date('1/1/1939','dd/mm/yyyy'),NULL)),'Estatuilla',16);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor guion original',nt_nombre(t_nombre('Mejor Guion Original',to_date('1/1/1940','dd/mm/yyyy'),NULL)),'Estatuilla',10);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor documental corto',nt_nombre(t_nombre('Mejor Documental Corto',to_date('1/1/1941','dd/mm/yyyy'),NULL)),'Estatuilla',17);
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor documental largo',nt_nombre(t_nombre('Mejor Banda Sonora',to_date('1/1/1943','dd/mm/yyyy'),NULL)),'Estatuilla',17);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor documental largo',nt_nombre(t_nombre('Mejor Documental Largo',to_date('1/1/1943','dd/mm/yyyy'),NULL)),'Estatuilla',17);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor diseno de vestuario',nt_nombre(t_nombre('Mejor Diseno de Vestuario',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',18);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor pelicula de habla no inglesa',nt_nombre(t_nombre('Mejor Pelicula de Habla no Inglesa',to_date('1/1/1948','dd/mm/yyyy'),NULL)),'Estatuilla',21);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la mejor edicion de sonido',nt_nombre(t_nombre('Mejor Edicion de Sonido',to_date('1/1/1963','dd/mm/yyyy'),NULL)),'Estatuilla',13);
@@ -129,6 +129,7 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio a la mejor Edicio
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al merito tecnico o cientifico',nt_nombre(t_nombre('Oscar al Merito Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',51);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico o cientifico',nt_nombre(t_nombre('Premio al Logro Tecnico o Cientifico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Placa',51);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio al logro tecnico',nt_nombre(t_nombre('Premio al Logro Tecnico',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Reconocimiento',51);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,4,'Premio Fotografia Blanco y Negro',nt_nombre(t_nombre('Premio a la mejor fotografia blanco y negro',to_date('1/1/1931','dd/mm/yyyy'),NULL)),'Estatuilla',30);
 
 rem / INSERTS ROL /
 
