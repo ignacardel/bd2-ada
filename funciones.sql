@@ -12,8 +12,8 @@ CREATE OR REPLACE
 FUNCTION "calcularAno" (fecha  DATE)
 RETURN VARCHAR2
 AS
-	ano varchar2(4);
+	anos varchar2(4);
 BEGIN
-	ano := TO_CHAR(fecha,'yyyy');
-	RETURN ano;
+	anos := TO_CHAR(fecha,'yyyy');
+	RETURN anos;
 END;
