@@ -1,0 +1,127 @@
+object daDataModule1: TdaDataModule
+  object daMySQLQueryDataView1: TdaMySQLQueryDataView
+    UserName = 'Query_PERSONA'
+    Height = 371
+    Left = 228
+    NameColumnWidth = 105
+    SizeColumnWidth = 35
+    SortMode = 0
+    Top = 35
+    TypeColumnWidth = 52
+    Width = 413
+    AutoSearchTabOrder = 0
+    object PERSONA: TppChildDBPipeline
+      AutoCreateFields = False
+      UserName = 'PERSONA'
+      object ppField1: TppField
+        FieldAlias = 'PERS_ID'
+        FieldName = 'PERS_ID'
+        FieldLength = 0
+        DataType = dtDouble
+        DisplayWidth = 10
+        Position = 0
+      end
+      object ppField2: TppField
+        FieldAlias = 'PERS_NOMBRE'
+        FieldName = 'PERS_NOMBRE'
+        FieldLength = 25
+        DisplayWidth = 25
+        Position = 1
+      end
+      object ppField3: TppField
+        FieldAlias = 'PERS_APELLIDO'
+        FieldName = 'PERS_APELLIDO'
+        FieldLength = 25
+        DisplayWidth = 25
+        Position = 2
+      end
+      object ppField4: TppField
+        FieldAlias = 'ACTRIZREPARTOPREMIOS_STA'
+        FieldName = 'ACTRIZREPARTOPREMIOS_STA'
+        FieldLength = 0
+        DataType = dtDouble
+        DisplayWidth = 10
+        Position = 3
+      end
+      object ppField5: TppField
+        FieldAlias = 'MEJORACTRIZMASPREMIOS'
+        FieldName = 'MEJORACTRIZMASPREMIOS'
+        FieldLength = 0
+        DataType = dtDouble
+        DisplayWidth = 10
+        Position = 4
+      end
+    end
+    object daSQL1: TdaSQL
+      DatabaseName = 'OSCAR'
+      DatabaseType = dtOracle
+      DataPipelineName = 'PERSONA'
+      EditSQLAsText = True
+      LinkColor = clBlack
+      MaxSQLFieldAliasLength = 0
+      SQLText.Strings = (
+        'SELECT "PERSONA"."PERS_ID", '
+        '       "PERSONA"."PERS_NOMBRE", '
+        '       "PERSONA"."PERS_APELLIDO", '
+        
+          '       "ActrizRepartoPremios"(STAF_ID) ActrizRepartoPremios_STA,' +
+          ' '
+        '       "mejorActrizMasPremios"() mejorActrizMasPremios'
+        'FROM "OSCAR"."PERSONA" "PERSONA"'
+        '      INNER JOIN "OSCAR"."STAFF" "STAFF" ON '
+        '     ("STAFF"."STAF_PERSONA" = "PERSONA"."PERS_ID")'
+        '      INNER JOIN "OSCAR"."ROL" "ROL" ON '
+        '     ("ROL"."ROL_ID" = "STAFF"."STAF_ROL")'
+        '      INNER JOIN "OSCAR"."POSTULADO" "POSTULADO" ON '
+        '     ("POSTULADO"."POST_STAFF" = "STAFF"."STAF_ID")'
+        'WHERE ( "ROL"."ROL_NOMBRE" = '#39'ACTRIZ PRINCIPAL'#39' )'
+        
+          '       AND ( "ActrizRepartoPremios"(STAF_ID) = "mejorActrizMasPr' +
+          'emios"() )')
+      SQLType = sqSQL2
+      object daField1: TdaField
+        Alias = 'PERS_ID'
+        DataType = dtDouble
+        DisplayWidth = 10
+        FieldAlias = 'PERS_ID'
+        FieldLength = 0
+        FieldName = 'PERS_ID'
+        SQLFieldName = 'PERS_ID'
+      end
+      object daField2: TdaField
+        Alias = 'PERS_NOMBRE'
+        DisplayWidth = 25
+        FieldAlias = 'PERS_NOMBRE'
+        FieldLength = 25
+        FieldName = 'PERS_NOMBRE'
+        SQLFieldName = 'PERS_NOMBRE'
+      end
+      object daField3: TdaField
+        Alias = 'PERS_APELLIDO'
+        DisplayWidth = 25
+        FieldAlias = 'PERS_APELLIDO'
+        FieldLength = 25
+        FieldName = 'PERS_APELLIDO'
+        SQLFieldName = 'PERS_APELLIDO'
+      end
+      object daField4: TdaField
+        Alias = 'ACTRIZREPARTOPREMIOS_STA'
+        DataType = dtDouble
+        DisplayWidth = 10
+        FieldAlias = 'ACTRIZREPARTOPREMIOS_STA'
+        FieldLength = 0
+        FieldName = 'ACTRIZREPARTOPREMIOS_STA'
+        SQLFieldName = 'ACTRIZREPARTOPREMIOS_STA'
+      end
+      object daField5: TdaField
+        Alias = 'MEJORACTRIZMASPREMIOS'
+        DataType = dtDouble
+        DisplayWidth = 10
+        FieldAlias = 'MEJORACTRIZMASPREMIOS'
+        FieldLength = 0
+        FieldName = 'MEJORACTRIZMASPREMIOS'
+        SQLFieldName = 'MEJORACTRIZMASPREMIOS'
+      end
+    end
+  end
+end
