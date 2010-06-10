@@ -1,0 +1,308 @@
+CREATE OR REPLACE 
+FUNCTION "CalcularAno" (fecha DATE)
+	RETURN VARCHAR2
+	AS
+		ano varchar2(4);
+BEGIN
+		ano := TO_CHAR(fecha,'yyyy');
+		RETURN ano;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "masPremiada" RETURN NUMBER
+AS
+	mas INT;
+	CURSOR busqueda IS SELECT ps.POST_PELICULA AS pelicula FROM POSTULADO ps, PELICULA p WHERE ps.POST_GANADORA = 'SI' AND ps.POST_PELICULA = p.PELI_ID 
+		   GROUP BY(ps.POST_PELICULA) 
+		   HAVING COUNT(ps.POST_PELICULA) = (SELECT MAX(COUNT(ps2.POST_PELICULA)) FROM POSTULADO ps2, PELICULA p2 WHERE ps2.POST_GANADORA = 'SI' AND ps2.POST_PELICULA = p2.PELI_ID 
+                   GROUP BY(ps2.POST_PELICULA)) ;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	FOR resultado IN busqueda LOOP
+		mas := resultado.pelicula;
+	END LOOP;
+	RETURN mas;
+	
+END;
+
+CREATE OR REPLACE 
+FUNCTION "obtenerNombrePremio" (PREMIO_NOMBRE  INT)
+RETURN VARCHAR2
+AS
+
+	resultado VARCHAR(50);
+	CURSOR busqueda IS SELECT PREM_DESCRIPCION FROM PREMIO_CATEGORIA WHERE PREM_ID = PREMIO_NOMBRE;
+	aux busqueda % ROWTYPE;
+BEGIN
+	FOR aux IN busqueda LOOP
+		resultado := aux.PREM_DESCRIPCION;
+	END LOOP;
+RETURN resultado;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarDirector" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'DIRECTOR');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarDirectorArte" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'PRODUCTOR');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarFotografia" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'DIRECTOR DE FOTOGRAFIA');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarGenero" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+blas VARCHAR2(15);
+resultado VARCHAR2(50);
+idgenero NUMBER;
+generosig NUMBER;
+generosig2 NUMBER;
+
+BEGIN
+	SELECT p.PELI_GENERO INTO idgenero FROM PELICULA p  WHERE p.PELI_ID = idpelicula;
+	SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = idgenero;
+	resultado := blas;
+	SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = idgenero;
+	if (generosig IS NOT NULL) then
+		SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+		resultado := resultado || '/' || blas;
+		SELECT g.GENE_PADRE INTO generosig2 FROM GENERO g WHERE g.GENE_ID = generosig;
+		if (generosig2 IS NOT NULL) then
+			SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig2;
+			resultado := resultado || '/' || blas;
+			SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = generosig2;
+			if (generosig IS NOT NULL) then
+				SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+				resultado := resultado || '/' || blas;
+			END if;
+		END if;
+	END if;
+
+RETURN resultado;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarGuion" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'GUIONISTA');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarMontaje" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'MONTAJE');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarMusica" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'SONIDISTA');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarProductor" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND ("ROL"."ROL_NOMBRE" = 'PRODUCTOR');
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+		if recorrido.nombreper IS NOT NULL then
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+		end if;
+		if recorrido.nombreper IS NULL then
+			resultado := 'UNKNOWN';
+		end if;
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "sacarReparto" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+
+resultado VARCHAR2(1000);
+
+CURSOR busqueda IS SELECT  "PERSONA"."PERS_NOMBRE" AS nombreper, 
+       "PERSONA"."PERS_APELLIDO" AS apellidoper
+FROM "OSCAR"."STAFF" "STAFF", "OSCAR"."PERSONA" "PERSONA", "OSCAR"."ROL" "ROL"  
+WHERE   ("STAFF"."STAF_PELICULA" = idpelicula) AND  ("PERSONA"."PERS_ID" = "STAFF"."STAF_PERSONA") AND  ("ROL"."ROL_ID" = "STAFF"."STAF_ROL") AND (("ROL"."ROL_NOMBRE" = 'ACTOR DE REPARTO') OR ("ROL"."ROL_NOMBRE" = 'ACTRIZ DE REPARTO'));
+
+recorrido busqueda % ROWTYPE;
+
+BEGIN
+	for recorrido in busqueda LOOP
+	
+			resultado :=  '  ' || recorrido.nombreper ||  '  ' ||recorrido.apellidoper;
+	
+	end LOOP;
+
+return resultado;	
+
+END;
+
+CREATE OR REPLACE 
+FUNCTION "validarEmpate"(PELID  INT, PELI_PREMIO  INT, FECHA_POSIBLE DATE )
+RETURN NUMBER
+AS
+
+	resultado INT;
+
+	
+BEGIN
+SELECT COUNT(*) INTO resultado FROM POSTULADO ps, PELICULA p WHERE (ps.POST_PELICULA = p.PELI_ID) AND (ps.POST_PELICULA <>  PELID) AND (ps.POST_PREMIO = PELI_PREMIO) AND (ps.POST_GANADORA = 'SI') AND (TO_CHAR(p.PELI_FECHA_ESTRENO, 'yyyy') = TO_CHAR(FECHA_POSIBLE, 'yyyy')   );
+	RETURN resultado;
+END;
