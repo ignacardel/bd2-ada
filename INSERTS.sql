@@ -99,7 +99,7 @@ INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los tecnicos
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en las peliculas animadas',nt_nombre(t_nombre('Peliculas Animadas',to_date('1/1/2001','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,2,'Division de los productores enfocada en los casos especiales',nt_nombre(t_nombre('Especiales',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',4);
 
-INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Pelicula',nt_nombre(t_nombre('Mejor Pelicula',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',6);
+INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Pelicula',nt_nombre(t_nombre('Outstanding Production',to_date('1/1/1929','dd/mm/yyyy'),to_date('1/1/1940','dd/mm/yyyy')),t_nombre('outstanding Motion Picture',to_date('1/1/1941','dd/mm/yyyy'),to_date('1/1/1943','dd/mm/yyyy')),t_nombre('Best Motion',to_date('1/1/1944','dd/mm/yyyy'),to_date('1/1/1961','dd/mm/yyyy')),t_nombre('Best Picture',to_date('1/1/1962','dd/mm/yyyy'),NULL)),'Estatuilla',6);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al Mejor Actor',nt_nombre(t_nombre('Mejor Actor',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',9);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido a la Mejor Actriz',nt_nombre(t_nombre('Mejor Actriz',to_date('1/1/1928','dd/mm/yyyy'),NULL)),'Estatuilla',9);
 INSERT INTO PREMIO_CATEGORIA VALUES(S_PREMIO.NEXTVAL,3,'Premio dirigido al mejor actor de reparto',nt_nombre(t_nombre('Mejor Actor de Reparto',to_date('1/1/1936','dd/mm/yyyy'),NULL)),'Estatuilla',9);
