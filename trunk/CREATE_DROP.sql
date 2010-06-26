@@ -50,14 +50,6 @@ DROP TYPE t_recibido;
 
 rem / TDA /
 
-rem / TDA PREMIO_MIEMBRO/
-
-create type t_premio_miembro as object(
-fecha_votacion date,
-tipo_voto varchar2(1)
-);
-/
-
 rem / TDA HISTORIA /
 
 create type t_historia as object (
@@ -128,10 +120,6 @@ rem / TABLA ANIDADA CREADOR /
 create or replace type nt_creador as table of t_creador;
 /
 
-rem / TABLA ANIDADA PREMIO_MIEMBRO /
-create or replace type nt_fecha as table of t_premio_miembro;
-/
-
 rem / VARRAY HISTORIA /
 
 create or replace type nt_historia as table of t_historia;
@@ -192,9 +180,12 @@ rem / TABLA PREMIO_MIEMBRO /
 CREATE TABLE PREMIO_MIEMBRO(
 PM_PREMIO NUMBER NOT NULL,
 PM_MIEMBRO NUMBER NOT NULL,
-PM_FECHA nt_fecha NULL,
-CONSTRAINT PK_PREMIO_MIEMBRO PRIMARY KEY(PM_PREMIO,PM_MIEMBRO)
-)nested table PM_FECHA store as fech_nt;
+PM_FECHA DATE NOT NULL,
+PM_TIPO_VOTO VARCHAR2(1),
+PM_TOTAL_VOTOS NUMBER NOT NULL ,
+CONSTRAINT PK_PREMIO_MIEMBRO PRIMARY KEY(PM_PREMIO,PM_MIEMBRO,PM_FECHA),
+CONSTRAINT PM_TIPO_VOTO_1 CHECK (PM_TIPO_VOTO IN('N','G','P'))
+);
 
 rem / TABLA GENERO /
 
