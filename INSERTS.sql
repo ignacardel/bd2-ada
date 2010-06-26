@@ -381,6 +381,8 @@ INSERT INTO PELICULA VALUES (113, 'Beyond the walss', NULL, NULL, 'The story tak
 INSERT INTO PELICULA VALUES (114, 'Camila', NULL, NULL, 'It is 1847 and Camila OGorman (Susu Pecoraro), a pillar of Buenos Aires society, belongs to a family which enthusiastically supports Argentine dictator Juan Manuel de Rosas. She is engaged to Ignacio, a wealthy man with whom she is not in love. When her fellow socialites advise her to not let Ignacio get away, she describes her longing for a husband she could love and feel proud of. Secretly, she reads literature critical of the regime by author Esteban Echeverria.', 90, TO_DATE('19840808000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'Espanol', 'A', 9, 58, NULL);
 INSERT INTO PELICULA VALUES (115, 'Rambo IV', NULL, NULL, 'Rambo: First Blood Part II is a 1985 second film in the Rambo series and is an Action/War film starring Sylvester Stallone as Vietnam veteran John Rambo.', 90, TO_DATE('19840808000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'INGLES', 'R', 1, 36, NULL);
 INSERT INTO PELICULA VALUES (116, 'Monster', NULL, NULL, 'Aileen Lee Wuornos (Charlize Theron) ha tenido una vida terrible, a la cual ella se resigna suponiendo que nada puede hacer. No alcanzó a conocer a su madre,ella fue violada varias veces por un amigo de su padre, pero el nunca le hizo caso. A los 15 años Aileen queda abandonada y empieza a prostituirse a modo de supervivencia. Allí conoce el rechazo que tienen los hombres hacia ella, como la deningran a causa de diversas quemaduras sufridas en su niñez y su aspecto y personalidad aberrantes. Aileen está convencida de que jamás podrá hallar el amor en nadie, hasta que conoce un invierno a Selby Wall (verdadera Tyria Moore) en un bar donde hay un acentuado aire homosexual.', 109, TO_DATE('20031226000000', 'YYYYMMDDHH24MISS'), NULL, NULL, 'INGLES', 'R', 1, 1, NULL);
+INSERT INTO PELICULA VALUES (117, 'El Padrino', NULL, NULL, 'Esta narra la vida de Don Vito Corleone, jefe de una de las cinco familias que ejercen el mando de la Cosa Nostra en la ciudad de Nueva York en los años 40, representa la experiencia de los inmigrantes (en su caso italianos) a los Estados Unidos y al mismo tiempo expone las contradicciones del "sueño americano". La película contó con un reparto encabezado por Marlon Brando, quien interpreta a Don Vito; Al Pacino, James Caan y John Cazale en el papel de los hijos de Don Vito: Michael, Sonny y Fredo, respectivamente; Robert Duvall, como Tom Hagen, el hijo adoptivo de Corleone y abogado de la familia; y Diane Keaton, como Kay Adams, la novia de Michael.', 175, TO_DATE('19720315000000', 'YYYYMMDDHH24MISS'), NULL, 1, 'INGLES', 'R', 1, 1, NULL);
+INSERT INTO PELICULA VALUES (118, 'El Padrino II', NULL, NULL, 'Esta narra la vida de Don Vito Corleone, jefe de una de las cinco familias que ejercen el mando de la Cosa Nostra en la ciudad de Nueva York en los años 40, representa la experiencia de los inmigrantes (en su caso italianos) a los Estados Unidos y al mismo tiempo expone las contradicciones del "sueño americano". La película contó con un reparto encabezado por Marlon Brando, quien interpreta a Don Vito; Al Pacino, James Caan y John Cazale en el papel de los hijos de Don Vito: Michael, Sonny y Fredo, respectivamente; Robert Duvall, como Tom Hagen, el hijo adoptivo de Corleone y abogado de la familia; y Diane Keaton, como Kay Adams, la novia de Michael.', 204, TO_DATE('19740415000000', 'YYYYMMDDHH24MISS'), NULL, 2, 'INGLES', 'R', 1, 1, 117);
 
 rem / INSERTS COMPANIAS /
 
@@ -821,6 +823,8 @@ INSERT INTO "PERSONA" VALUES (281, 'Sam', NULL, 'Zimbalist', NULL, NULL, NULL, T
 INSERT INTO "PERSONA" VALUES (282, 'Frank', NULL, 'Mccarthy', NULL, NULL, NULL, TO_DATE('19120408000000', 'YYYYMMDDHH24MISS'), NULL, 23,NULL,NULL);
 INSERT INTO "PERSONA" VALUES (283, 'Susan', NULL, 'Geston', NULL, NULL, NULL, TO_DATE('19600408000000', 'YYYYMMDDHH24MISS'), NULL, 22,NULL,NULL);
 INSERT INTO "PERSONA" VALUES (284, 'Charlize', NULL, 'Theron', NULL, NULL, NULL, TO_DATE('19750807000000', 'YYYYMMDDHH24MISS'), NULL, 63,NULL,'F');
+INSERT INTO "PERSONA" VALUES (285, 'Marlon', NULL, 'Brando', NULL, NULL, NULL, TO_DATE('19240403000000', 'YYYYMMDDHH24MISS'), NULL, 22,NULL,'M');
+INSERT INTO "PERSONA" VALUES (286, 'Robert', NULL, 'De Niro', NULL, NULL, NULL, TO_DATE('19430817000000', 'YYYYMMDDHH24MISS'), NULL, 22,NULL,'M');
 
 rem / INSERTS STAFF /
 
@@ -1123,6 +1127,8 @@ INSERT INTO "STAFF" VALUES (296, NULL, NULL, 42, 250, 6);
 INSERT INTO "STAFF" VALUES (297, NULL, NULL, 34, 247, 6);
 INSERT INTO "STAFF" VALUES (298, NULL, NULL, 37, 248, 6);
 INSERT INTO "STAFF" VALUES (299, NULL, NULL, 35, 249, 6);
+INSERT INTO "STAFF" VALUES (300, 'Vito Corleone', NULL, 117, 285,2);
+INSERT INTO "STAFF" VALUES (301, 'Vito Corleone', NULL, 118, 286,2);
 
 rem / POSTULADOS /
 
@@ -1433,7 +1439,8 @@ INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1986','dd/mm/yyy
 INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1986','dd/mm/yyyy'),'SI','NO',NULL,NULL,23,34,297);
 INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1986','dd/mm/yyyy'),'SI','NO',NULL,NULL,23,37,298);
 INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1986','dd/mm/yyyy'),'SI','NO',NULL,NULL,23,35,299);
-
+INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1973','dd/mm/yyyy'),'SI','SI',NULL,NULL,24,117,300);
+INSERT INTO POSTULADO VALUES(S_POSTULADO.NEXTVAL,TO_DATE('20/05/1975','dd/mm/yyyy'),'SI','SI',NULL,NULL,24,118,301);
 
 rem / INSERTS FAMILIARES /
 
