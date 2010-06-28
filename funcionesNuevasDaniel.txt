@@ -1,0 +1,289 @@
+CREATE OR REPLACE 
+FUNCTION "actrizMasPremios" RETURN NUMBER
+AS
+	MAXIMO NUMBER;
+	CURSOR busqueda IS SELECT MAX(X.PREMIOS) AS MAXPREMIO
+                                           FROM(SELECT COUNT(STAF_PERSONA) AS PREMIOS, PERS_ID
+                                                      FROM    STAFF, ROL, POSTULADO, PERSONA
+                                                      WHERE  PERS_ID = STAF_PERSONA
+                                                      AND       STAF_ROL = ROL_ID
+                                                      AND       POST_STAFF = STAF_ID
+                                                      AND       ((ROL_NOMBRE = 'ACTRIZ DE REPARTO') OR (ROL_NOMBRE='ACTRIZ PRINCIPAL'))
+                                                      AND       POST_GANADORA = 'SI'
+                                                      AND       POST_NOMINADA = 'SI'
+                                                      GROUP BY   PERS_ID ) X;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	MAXIMO:=0;
+	FOR resultado IN busqueda LOOP
+		MAXIMO:= resultado.MAXPREMIO;
+	END LOOP;
+	RETURN MAXIMO;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "actrizNominaciones" (staff  NUMBER)
+RETURN NUMBER
+AS
+	nominaciones INT;
+	CURSOR busqueda IS SELECT  COUNT(POST_STAFF) AS NOMINACIONES
+	                                    FROM     POSTULADO 
+                                            WHERE   POST_STAFF = staff;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	FOR resultado IN busqueda LOOP
+		nominaciones:= resultado.NOMINACIONES;
+	END LOOP;
+	RETURN nominaciones;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "calcularEstadisticaGenero" RETURN VARCHAR2
+AS
+	valor varchar2(1000);
+	generoComun number;
+	otrosGeneros number;
+	total number;
+	CURSOR busqueda IS SELECT PELI_ID 
+					    FROM   PELICULA, POSTULADO
+                                            WHERE PELI_ID=POST_PELICULA
+                                            AND      POST_GANADORA = 'SI'
+                                            AND      POST_PREMIO = 23;
+	resultado busqueda %ROWTYPE;
+BEGIN
+	generoComun := 0;
+	otrosGeneros := 0;
+	total := 0;
+	FOR resultado IN busqueda LOOP
+		IF resultado.PELI_ID IS NOT NULL THEN						
+			IF "generoComun"(resultado.PELI_ID) = 1 THEN
+				generoComun:= generoComun +1;
+			ELSE
+				otrosGeneros:= otrosGeneros + 1;
+			END IF;
+		END IF;
+	total:= total+1;
+	END LOOP;
+	
+	generoComun:= trunc((generoComun*100)/ total,2);
+	otrosGeneros:= trunc((otrosGeneros*100)/total,2);
+	
+	valor := 'El ' || TO_CHAR(generoComun) || '% de las peliculas ganadoras al premio de mejor pelicula son pertenecientes a cualquiera de los siguientes generos:' || chr(13);
+	valor:= valor || 'Drama, Romance, Musicales, Epicas, Sociales, Politica' || chr(13);
+	valor := valor || 'El '|| TO_CHAR(otrosGeneros)|| '% de estas peliculas pertenecen a otros generos.';
+	RETURN valor;
+END;
+
+
+CREATE OR REPLACE 
+FUNCTION "esNegro" (persona  NUMBER)
+RETURN NUMBER
+AS
+	es number;
+	CURSOR busqueda IS SELECT  PERS_ETNICIDAD AS ETNICIDAD
+	                                    FROM     PERSONA
+                                            WHERE   PERS_ID = persona;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	es:= 0;
+	FOR resultado IN busqueda LOOP
+		IF resultado.ETNICIDAD = 'NEGRO' THEN		
+			es:= 1;
+		END IF;
+	END LOOP;
+	RETURN es;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "esPersonaGanadora" (staff  NUMBER)
+RETURN NUMBER
+AS
+	es number;
+	CURSOR busqueda IS SELECT  POST_GANADORA 
+	                                    FROM     POSTULADO 
+                                            WHERE   POST_STAFF = staff;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	es:=  0;
+	FOR resultado IN busqueda LOOP
+		IF resultado.POST_GANADORA = 'SI' THEN
+			es:= 1;
+		END IF;			
+	END LOOP;
+	RETURN es;
+END;
+
+
+CREATE OR REPLACE 
+FUNCTION "generoComun" (pelicula  NUMBER)
+RETURN NUMBER
+AS
+	genero VARCHAR2(15);
+	resultado VARCHAR2(50);
+	idgenero NUMBER;
+	generosig NUMBER;
+	generosig2 NUMBER;
+	valor number;
+BEGIN
+	valor:=0;
+	SELECT PELI_GENERO INTO idgenero FROM PELICULA   WHERE PELI_ID = pelicula;
+	
+	SELECT GENE_NOMBRE INTO genero FROM GENERO  WHERE GENE_ID = idgenero;
+	IF genero = 'DRAMA' OR  genero = 'ROMANCE' OR  genero = 'MUSICAL' OR  genero = 'EPICA' OR  genero = 'SOCIAL' OR  genero = 'POLITICO' THEN
+		valor:=1;
+	END IF;
+	
+	SELECT GENE_PADRE INTO generosig FROM GENERO  WHERE GENE_ID = idgenero;
+	if (generosig IS NOT NULL) then
+		SELECT g.GENE_NOMBRE INTO genero FROM GENERO g WHERE g.GENE_ID = generosig;
+		IF genero = 'DRAMA' OR  genero = 'ROMANCE' OR  genero = 'MUSICAL' OR  genero = 'EPICA' OR  genero = 'SOCIAL' OR  genero = 'POLITICO' THEN
+			valor:=1;
+		END IF;
+		
+		SELECT g.GENE_PADRE INTO generosig2 FROM GENERO g WHERE g.GENE_ID = generosig;
+		if (generosig2 IS NOT NULL) then
+			SELECT g.GENE_NOMBRE INTO genero FROM GENERO g WHERE g.GENE_ID = generosig2;
+			IF genero = 'DRAMA' OR  genero = 'ROMANCE' OR  genero = 'MUSICAL' OR  genero = 'EPICA' OR  genero = 'SOCIAL' OR  genero = 'POLITICO' THEN
+				valor:=1;
+			END IF;
+			
+			SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = generosig2;
+			if (generosig IS NOT NULL) then
+				SELECT g.GENE_NOMBRE INTO genero FROM GENERO g WHERE g.GENE_ID = generosig;
+				IF genero = 'DRAMA' OR  genero = 'ROMANCE' OR  genero = 'MUSICAL' OR  genero = 'EPICA' OR  genero = 'SOCIAL' OR  genero = 'POLITICO' THEN
+					valor:=1;
+				END IF;
+			END if;
+		END if;
+	END if;
+	RETURN valor;
+END;
+
+
+CREATE OR REPLACE 
+FUNCTION "nominacionesActor" (actor  NUMBER)
+RETURN NUMBER
+AS
+	cuenta number;
+	CURSOR busqueda IS SELECT COUNT(STAF_ID) AS NOMINACIONES
+                                            FROM    STAFF, ROL, POSTULADO
+                                            WHERE  STAF_ID= POST_STAFF
+                                           AND        POST_NOMINADA= 'SI'
+                                           AND        STAF_ROL = ROL_ID
+                                          AND        ((ROL_NOMBRE= 'ACTOR PRINCIPAL') OR (ROL_NOMBRE= 'ACTOR DE REPARTO'))
+                                           AND       STAF_PERSONA = actor;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	FOR resultado IN busqueda LOOP
+		cuenta:= resultado.NOMINACIONES;
+	END LOOP;
+	RETURN cuenta;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "numeroNominacionesEnTiempo" (categoria  NUMBER)
+RETURN VARCHAR2
+AS
+	valor VARCHAR2(500);
+	cantidad number;
+	ano number;
+	i number;
+	CURSOR busqueda IS SELECT CERE_FECHA, COUNT(POST_ID) PREMIOS
+                                            FROM    POSTULADO, CEREMONIA, PELICULA
+                                            WHERE  POST_PELICULA = PELI_ID
+                                            AND       POST_PREMIO = categoria
+                                            AND       TO_CHAR(CERE_FECHA,'yyyy') = "calcularAnoMasUno"(PELI_FECHA_ESTRENO)
+                                            GROUP  BY CERE_FECHA
+                                            ORDER  BY CERE_FECHA ASC;
+	resultado busqueda % ROWTYPE;
+BEGIN
+	cantidad:=0;
+	valor:='';
+	i:=0;
+	FOR resultado IN busqueda LOOP		
+		IF resultado.PREMIOS <> cantidad THEN
+			IF i <> 0 THEN
+				ano := TO_NUMBER(TO_CHAR(resultado.CERE_FECHA,'yyyy')) -1;
+				valor:=valor || ' hasta ' || TO_CHAR(ano) ||chr(13);	
+			END IF;	
+			valor:= valor || TO_CHAR(resultado.PREMIOS) || ' Nominaciones desde ' || TO_CHAR(resultado.CERE_FECHA,'yyyy');
+			cantidad:=resultado.PREMIOS;
+		END IF;
+	i:= i+1;
+	END LOOP;
+	valor:=valor || ' hasta el presente.';
+	RETURN valor;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "obtenerNombresCategoria" (categoria  NUMBER)
+RETURN VARCHAR2
+AS
+	nombres varchar2(500);
+	fecha_inicio varchar2(50);
+	fecha_fin varchar2(50);
+	CURSOR BUSQUEDA IS SELECT * FROM PREMIO_CATEGORIA WHERE PREM_ID=categoria;
+	AUX BUSQUEDA %ROWTYPE;
+BEGIN
+	nombres:='';
+	FOR AUX IN BUSQUEDA LOOP
+		IF AUX.PREM_NOMBRE IS NOT NULL THEN
+			FOR i IN AUX.PREM_NOMBRE.FIRST..AUX.PREM_NOMBRE.LAST LOOP
+				IF AUX.PREM_NOMBRE(i).nomb_fecha_fin IS NOT NULL THEN	
+					nombres:= nombres|| TO_CHAR(AUX.PREM_NOMBRE(i).nomb_fecha_inicio,'yyyy')||' a '|| TO_CHAR(AUX.PREM_NOMBRE(i).nomb_fecha_fin,'yyyy')||': '|| AUX.PREM_NOMBRE(i).nomb_nombre ||chr(13);
+				ELSE
+					nombres:=nombres|| TO_CHAR(AUX.PREM_NOMBRE(i).nomb_fecha_inicio,'yyyy')||' hasta el presente: '|| AUX.PREM_NOMBRE(i).nomb_nombre;
+				END IF;
+			END LOOP;
+		END IF;
+	END LOOP;
+	RETURN nombres;
+END;
+
+CREATE OR REPLACE 
+FUNCTION "premiosActor" (actor  NUMBER)
+RETURN NUMBER
+AS
+	cuenta number;
+	CURSOR busqueda IS SELECT COUNT(STAF_ID) AS PREMIOS
+                                            FROM    STAFF, ROL, POSTULADO
+                                            WHERE  STAF_ID= POST_STAFF
+                                           AND        POST_NOMINADA= 'SI'
+                                          AND         POST_GANADORA = 'SI'
+                                           AND        STAF_ROL = ROL_ID
+                                          AND        ((ROL_NOMBRE= 'ACTOR PRINCIPAL') OR (ROL_NOMBRE= 'ACTOR DE REPARTO'))
+                                           AND       STAF_PERSONA = actor;
+	resultado busqueda % ROWTYPE;
+
+	BEGIN
+		FOR resultado IN busqueda LOOP
+		cuenta:= resultado.PREMIOS;
+	END LOOP;	
+	RETURN cuenta;
+END;
+
+
+CREATE OR REPLACE 
+FUNCTION "premiosActriz" (actriz  NUMBER)
+RETURN NUMBER
+AS
+	cuenta number;
+	CURSOR busqueda IS SELECT COUNT(STAF_ID) AS PREMIOS
+                                            FROM    STAFF, ROL, POSTULADO
+                                            WHERE  STAF_ID= POST_STAFF
+                                           AND        POST_NOMINADA= 'SI'
+                                          AND         POST_GANADORA = 'SI'
+                                           AND        STAF_ROL = ROL_ID
+                                          AND        ((ROL_NOMBRE= 'ACTRIZ PRINCIPAL') OR (ROL_NOMBRE= 'ACTRIZ DE REPARTO'))
+                                           AND       STAF_PERSONA = actriz;
+	resultado busqueda % ROWTYPE;
+
+BEGIN
+	FOR resultado IN busqueda LOOP
+		cuenta:= resultado.PREMIOS;
+	END LOOP;	
+	RETURN cuenta;
+END;
+
+
+
