@@ -287,3 +287,203 @@ END;
 
 
 
+
+CREATE OR REPLACE 
+FUNCTION "fechasDobleGanador" (idactor  NUMBER, fechaceremonia DATE)
+RETURN VARCHAR2
+AS
+	fechactual DATE;
+	resultado VARCHAR2(20);
+BEGIN
+	SELECT p.POST_FECHA  into fechactual
+	FROM STAFF s, POSTULADO p 
+	WHERE (p.POST_NOMINADA = 'SI') 
+	AND (p.POST_GANADORA = 'SI') 
+	AND (p.POST_STAFF = s.STAF_ID) 
+	AND (p.POST_PREMIO = 24) 
+	AND (s.STAF_PERSONA = idactor)
+	AND (TO_CHAR(p.POST_FECHA, 'YYYY')  NOT LIKE  TO_CHAR(fechaceremonia, 'YYYY') );
+	resultado := '(' || TO_CHAR(fechaceremonia, 'YYYY') || ', ' || TO_CHAR(fechactual, 'YYYY') || ')';
+	RETURN resultado;
+END;
+
+
+
+CREATE OR REPLACE 
+FUNCTION "revisarComedia" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+blas VARCHAR2(15);
+resultado VARCHAR2(50);
+idgenero NUMBER;
+generosig NUMBER;
+generosig2 NUMBER;
+
+BEGIN
+	SELECT p.PELI_GENERO INTO idgenero FROM PELICULA p  WHERE p.PELI_ID = idpelicula;
+	SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = idgenero;
+	 if (blas = 'COMEDIA' ) then
+		return 1;
+	else
+		SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = idgenero;
+		if (generosig IS NOT NULL)  then
+			SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+			 if (blas = 'COMEDIA' ) then
+				return 1;
+			else
+				SELECT g.GENE_PADRE INTO generosig2 FROM GENERO g WHERE g.GENE_ID = generosig;
+				if (generosig2 IS NOT NULL) then
+					SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig2;
+					if (blas = 'COMEDIA' ) then
+						return 1;
+					else
+						SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = generosig2;
+						if (generosig IS NOT NULL) then
+							SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+							if (blas = 'COMEDIA' ) then
+								return 1;
+							end if;
+						end if;
+					
+					end if;
+				end if;
+			
+			end if;
+		end if;
+	
+	end if;
+RETURN 0;
+END;
+
+
+CREATE OR REPLACE 
+FUNCTION "revisarDrama" (idpelicula  NUMBER)
+RETURN VARCHAR2
+AS
+blas VARCHAR2(15);
+resultado VARCHAR2(50);
+idgenero NUMBER;
+generosig NUMBER;
+generosig2 NUMBER;
+
+BEGIN
+	SELECT p.PELI_GENERO INTO idgenero FROM PELICULA p  WHERE p.PELI_ID = idpelicula;
+	SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = idgenero;
+	if (blas = 'DRAMA' ) then
+		return 1;
+	else if (blas = 'COMEDIA' ) then
+		return 0;
+	else
+		SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = idgenero;
+		if (generosig IS NOT NULL)  then
+			SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+			if (blas = 'DRAMA' ) then
+				return 1;
+			else if (blas = 'COMEDIA' ) then
+				return 0;
+			else
+				SELECT g.GENE_PADRE INTO generosig2 FROM GENERO g WHERE g.GENE_ID = generosig;
+				if (generosig2 IS NOT NULL) then
+					SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig2;
+					if (blas = 'DRAMA' ) then
+						return 1;
+					else if (blas = 'COMEDIA' ) then
+						return 0;
+					else
+						SELECT g.GENE_PADRE INTO generosig FROM GENERO g WHERE g.GENE_ID = generosig2;
+						if (generosig IS NOT NULL) then
+							SELECT g.GENE_NOMBRE INTO blas FROM GENERO g WHERE g.GENE_ID = generosig;
+							if (blas = 'DRAMA' ) then
+								return 1;
+							end if;
+						end if;
+					end if;
+					end if;
+				end if;
+			end if;
+			end if;
+		end if;
+	end if;	
+	end if;
+RETURN 0;
+END;
+
+
+
+
+
+CREATE OR REPLACE 
+FUNCTION "sacarGanadoras" (idpelicula NUMBER)
+RETURN NUMBER
+AS
+	cuenta NUMBER;
+
+BEGIN
+	SELECT COUNT(POST_ID) into cuenta FROM POSTULADO WHERE (POST_PELICULA = idpelicula) AND (POST_GANADORA = 'SI') AND (POST_NOMINADA = 'SI');
+	Return cuenta;
+END;
+
+
+
+CREATE OR REPLACE 
+FUNCTION "sacarNominaciones" (idpelicula NUMBER)
+RETURN NUMBER
+AS
+	cuenta NUMBER;
+
+BEGIN
+	SELECT COUNT(POST_ID) into cuenta FROM POSTULADO WHERE (POST_PELICULA = idpelicula) AND (POST_GANADORA = 'NO') AND (POST_NOMINADA = 'SI');
+	Return cuenta;
+END;
+
+
+
+
+
+
+
+
+CREATE OR REPLACE 
+FUNCTION "validarParticipacion" (idpersona NUMBER)
+RETURN NUMBER
+AS
+	CURSOR busqueda IS SELECT DISTINCT(p.PERS_ID) as idcompare
+						FROM PERSONA p, POSTULADO ps, STAFF s, ROL r
+						WHERE (ps.POST_STAFF = s.STAF_ID)
+						AND ((s.STAF_ROL = 2) OR (s.STAF_ROL = 3))
+						AND (p.PERS_ID = s.STAF_PERSONA)
+						AND (ps.POST_GANADORA = 'SI')
+						AND (ps.POST_NOMINADA = 'SI')
+						AND ((ps.POST_PREMIO = 24) OR (ps.POST_PREMIO = 25));
+					
+	resultado busqueda % ROWTYPE;
+
+BEGIN
+	FOR resultado IN busqueda LOOP
+		IF resultado.idcompare = idpersona THEN
+			RETURN 1;
+		END IF;
+	END LOOP;	
+
+RETURN 0;
+END;
+
+
+
+CREATE OR REPLACE 
+FUNCTION "verificarDobleGanador" (idactor  NUMBER, fechaceremonia DATE)
+RETURN NUMBER
+AS
+	cuenta NUMBER;
+BEGIN
+	SELECT COUNT(s.STAF_PERSONA)  into cuenta
+	FROM STAFF s, POSTULADO p 
+	WHERE (p.POST_NOMINADA = 'SI') 
+	AND (p.POST_GANADORA = 'SI') 
+	AND (p.POST_STAFF = s.STAF_ID) 
+	AND (p.POST_PREMIO = 24) AND (s.STAF_PERSONA = idactor)
+	AND (TO_CHAR(p.POST_FECHA, 'YYYY')  NOT LIKE  TO_CHAR(fechaceremonia, 'YYYY') );
+	RETURN cuenta;
+END;
+
+
